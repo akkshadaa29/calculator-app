@@ -1,6 +1,6 @@
 import './Display.css';
 
-function Display({parentToChild}) {
+function Display({parentToChild}) {    
     return (
         <div className='display'>
             <h3>Enter</h3>

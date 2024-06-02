@@ -12,6 +12,14 @@ function Grid() {
       }
       const clear = () => {
         setData("");
+      }
+      const answer = (equation) => {
+        console.log("equation "+equation.toString());
+        let nums=equation.toString().split("+");
+        console.log(Number(nums[0]));
+        console.log(nums[1]);
+        setData(Number(nums[0]) + Number(nums[1]));
+        console.log("Data  "+data)
       }  
     return (
         <div>
@@ -36,7 +44,7 @@ function Grid() {
          <button class='grid-item'onClick={() => clear()}>clear</button>
          <button class='grid-item' onClick={() => parentToChild("0")}>0</button>
          <button class='grid-item' onClick={() => parentToChild(".")}>.</button>
-         <button class='grid-item' onClick={() => parentToChild("=")}>=</button> 
+         <button class='grid-item' onClick={() => answer(data)}>=</button> 
         </div>
         </div>
     );
