@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function Grid() {
     let [data, setData] = useState("");
-    let operations=["+","-","*","-","/","%"];
+    let [equation,setEquation]=useState("");
     const parentToChild = (a) => {
         setData(data + a);
         console.log("data "+data);
@@ -13,11 +13,42 @@ function Grid() {
       const clear = () => {
         setData("");
       }
-      const calculate=(equation)=>{
+      const calculate=(oldEquation)=>{
+        setEquation(oldEquation);
         for (let i = 0; i < equation.length; i++) {
           console.log(equation[i]);
-          let nums=equation.toString().split(equation[i]);
-          if(operations.includes(equation[i]))
+          if(equation[i]==="/")
+            {
+              let nums=equation.toString().split(equation[i]);
+              let ans=nums[0].charAt(nums[0].length) / nums[1].charAt(0);
+              setData(equation.substring(0,nums[0].length)+ans+nums[1].substring(1,equation.length));
+            }
+          if(equation[i]==="*")
+            {
+              let nums=equation.toString().split(equation[i]);
+              let ans=nums[0].charAt(nums[0].length) * nums[1].charAt(0);
+              setData(equation.substring(0,nums[0].length)+ans+nums[1].substring(1,equation.length));
+            }
+          if(equation[i]==="+")
+            {
+              let nums=equation.toString().split(equation[i]);
+              let ans=Number(nums[0].charAt(nums[0].length)) + Number(nums[1].charAt(0));
+              console.log("ans "+ans);
+              setData(equation.substring(0,nums[0].length)+ans+nums[1].substring(1,equation.length));
+            }
+          if(equation[i]==="-")
+            {
+              let nums=equation.toString().split(equation[i]);
+              let ans=nums[0].charAt(nums[0].length) - nums[1].charAt(0);
+              setData(equation.substring(0,nums[0].length)+ans+nums[1].substring(1,equation.length));
+            }
+          if(equation[i]==="%")
+           {
+              let nums=equation.toString().split(equation[i]);
+              let ans=nums[0].charAt(nums[0].length) % nums[1].charAt(0);
+              setData(equation.substring(0,nums[0].length)+ans+nums[1].substring(1,equation.length));
+           }              
+          /*if(operations.includes(equation[i]))
             {
               console.log("Found operation.")
               switch(equation[i])
@@ -40,7 +71,7 @@ function Grid() {
                 default:
                   console.log("Default");         
               }
-            }
+            }*/
       }
     } 
     return (
